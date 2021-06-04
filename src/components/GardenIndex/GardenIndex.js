@@ -18,7 +18,7 @@ class GardenIndex extends Component {
     }
   }
   componentDidMount () {
-    gardenIndex(11221)
+    gardenIndex()
       .then(res => this.setState({ gardens: res.data }))
   }
 
