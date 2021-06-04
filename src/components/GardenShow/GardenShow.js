@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 // import withRouter so we have access to the match route prop
 import { withRouter, Link } from 'react-router-dom'
 import { gardenShow } from '../../api/gardens'
+import CommentCreate from '../CommentCreate/CommentCreate'
 
 class GardenShow extends Component {
   constructor (props) {
@@ -52,6 +53,11 @@ class GardenShow extends Component {
           <Link to="/comments">
             <Button>Write a Post</Button>
           </Link>
+          <CommentCreate
+            gardenId={garden._id}
+            user={this.props.user}
+            msgAlert={this.props.msgAlert}
+          />
         </div>
       </Fragment>
     )
