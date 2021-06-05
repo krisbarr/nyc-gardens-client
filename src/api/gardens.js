@@ -4,7 +4,10 @@ import apiUrl from '../apiConfig'
 export const gardenIndex = () => {
   return axios({
     url: 'https://data.cityofnewyork.us/resource/p78i-pat6.json',
-    method: 'GET'
+    method: 'GET',
+    data: {
+      '$limit': 15
+    }
   })
 }
 
@@ -30,5 +33,11 @@ export const gardenShow = (id, user) => {
       // we need the user, so we have access to their token
       'Authorization': `Bearer ${user.token}`
     }
+  })
+}
+export const createdGardenIndex = () => {
+  return axios({
+    url: apiUrl + '/gardens/',
+    method: 'GET'
   })
 }

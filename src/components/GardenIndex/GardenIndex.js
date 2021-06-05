@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { Card } from 'react-bootstrap'
-// import Button from 'react-bootstrap/Button'
-// import { Link } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
+import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import { gardenIndex } from '../../api/gardens'
-import GardenCreate from '../GardenCreate/GardenCreate'
+// import GardenView from '../GardenView/GardenView'
 
 class GardenIndex extends Component {
   constructor (props) {
@@ -14,16 +12,17 @@ class GardenIndex extends Component {
     // keep track of the gardens in our application
     // initially they will be null until we have fetched them from the api
     this.state = {
-      gardens: null
+      gardens: null,
+      createdGardens: null
     }
   }
   componentDidMount () {
     gardenIndex()
       .then(res => this.setState({ gardens: res.data }))
   }
-
   render () {
     // destructure our gardens state
+    console.log('these are createdGardens', this.state.createdGardens)
     const { gardens } = this.state
     // if we haven't fetched any gardens yet from the API
     if (!gardens) {
@@ -47,14 +46,9 @@ class GardenIndex extends Component {
             <Card.Title>{garden.gardenname}</Card.Title>
             <Card.Text>{garden.borough}</Card.Text>
             <Card.Text>{garden.zipcode}</Card.Text>
-            <GardenCreate
-              parksId={garden.parksid}
-              name={garden.gardenname}
-              borough={garden.borough}
-              zipCode={garden.zipcode}
-              user={this.props.user}
-              msgAlert={this.props.msgAlert}
-            />
+            <Link to='/view-1'>
+              <Button onClick={() => this.props.setViewGarden(garden)}>View This Garden</Button>
+            </Link>
           </Card.Body>
         </Card>
       )
@@ -66,5 +60,5 @@ class GardenIndex extends Component {
     )
   }
 }
-
+// <Button onClick={this.handleClick}>Check out our Gardens</Button>
 export default GardenIndex

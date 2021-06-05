@@ -11,20 +11,32 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import Home from './components/Home/Home'
 import GardenIndex from './components/GardenIndex/GardenIndex'
+import GardenView from './components/GardenView/GardenView'
 import GardenShow from './components/GardenShow/GardenShow'
+import { createdGardenIndex } from './api/gardens'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      viewGarden: null,
+      createdGardens: null
     }
   }
-
+  componentDidMount () {
+    createdGardenIndex()
+      .then(res => this.setState({ createdGardens: res.data }))
+      .catch(console.error)
+  }
   setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
+
+  setViewGarden = (gard) => {
+    this.setState({ viewGarden: gard })
+  }
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -70,10 +82,13 @@ class App extends Component {
           )} />
           <Route exact path='/' component={Home} />
           <Route exact path='/gardens' render={() => (
-            <GardenIndex msgAlert={this.msgAlert} user={user} />
+            <GardenIndex setViewGarden={this.setViewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/gardens/:id' render={() => (
-            <GardenShow msgAlert={this.msgAlert} user={user} />
+          <Route exact path='/view-1' render={() => (
+            <GardenView createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/gardens/:id' render={() => (
+            <GardenShow createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
