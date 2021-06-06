@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
-// import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 // import withRouter so we have access to the match route prop
 import { withRouter } from 'react-router-dom'
-import { gardenShow } from '../../api/gardens'
+import { gardenShow, gardenUpdate } from '../../api/gardens'
 import CommentCreate from '../CommentCreate/CommentCreate'
 
 class GardenShow extends Component {
@@ -11,7 +11,8 @@ class GardenShow extends Component {
     super(props)
 
     this.state = {
-      garden: null
+      garden: null,
+      updated: true
     }
   }
 
@@ -33,6 +34,26 @@ class GardenShow extends Component {
         })
       })
   }
+  handleUpdate = (event) => {
+    const { msgAlert, match, user } = this.props
+    // make a patch request
+    gardenUpdate(match.params.id, user)
+      // set the updated variable to true, to redirect to the purchases page in render
+      .then(res => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'You Have Joined This Garden Successfully!',
+        message: 'Your are now a member',
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Sorry, that didn\'t work',
+          message: 'Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
+  }
+
   render () {
     const { garden } = this.state
     if (!garden) {
@@ -50,6 +71,7 @@ class GardenShow extends Component {
           <p>{garden.borough}</p>
           <p>{garden.zipCode}</p>
           <p>{garden.comments}</p>
+          <Button onClick={this.handleUpdate}>Join This Garden</Button>
           <CommentCreate
             gardenId={garden._id}
             user={this.props.user}
