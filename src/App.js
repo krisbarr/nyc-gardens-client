@@ -10,6 +10,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import Home from './components/Home/Home'
+import CreatedGardenIndex from './components/CreatedGardenIndex/CreatedGardenIndex'
 import GardenIndex from './components/GardenIndex/GardenIndex'
 import GardenView from './components/GardenView/GardenView'
 import GardenShow from './components/GardenShow/GardenShow'
@@ -83,6 +84,9 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/gardens' render={() => (
+            <CreatedGardenIndex createdGardens={this.state.createdGardens} setViewGarden={this.setViewGarden} msgAlert={this.msgAlert} user={user} />
+          )} />
           <Route exact path='/all-gardens' render={() => (
             <GardenIndex createdGardens={this.state.createdGardens} setViewGarden={this.setViewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
