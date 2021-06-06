@@ -46,8 +46,8 @@ class CreatedGardenIndex extends Component {
             <Card.Title>{garden.name}</Card.Title>
             <Card.Text>{garden.zipCode}</Card.Text>
             <Card.Text>{garden.borough}</Card.Text>
-            <Link to='/view-1'>
-              <Button onClick={() => this.props.setViewGarden(garden)}>View This Garden</Button>
+            <Link to={`/gardens/${garden._id}`}>
+              <Button>View This Garden</Button>
             </Link>
           </Card.Body>
         </Card>
