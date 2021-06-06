@@ -83,7 +83,7 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
-          <Route exact path='/gardens' render={() => (
+          <Route exact path='/all-gardens' render={() => (
             <GardenIndex createdGardens={this.state.createdGardens} setViewGarden={this.setViewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/view-1' render={() => (
