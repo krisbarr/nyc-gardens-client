@@ -28,30 +28,33 @@ class GardenCreate extends Component {
     // console.log(garden.parksId)
     // console.log('these are createdGardens', createdGardens[0])
     // console.log(createdGardens)
-    if (this.props.createdGardens.gardens.length > 0) {
+    const chosenGarden = this.props.createdGardens.gardens.find(({ parksId }) => parksId === garden.parksId)
+    console.log('this is chosenGarden', chosenGarden)
+    if (!chosenGarden) {
       // const chosenGarden = createdGardens.gardens.find(garden => garden.parksId.some(parksId => parksId === garden.parksId))
-      const chosenGarden = this.props.createdGardens.gardens.find(({ parksId }) => parksId === garden.parksId)
+      gardenCreate(garden, user)
+        .then(res => {
+          this.setState({ gardenId: res.data.garden._id })
+          return res
+        })
+        .then(res => msgAlert({
+          heading: 'Garden Joined Successfully!',
+          message: 'You are now a member',
+          variant: 'success'
+        }))
+        .catch(error => {
+          msgAlert({
+            heading: 'Sorry, that didnt work!',
+            message: 'Could not join this garden ' + error.message,
+            variant: 'danger'
+          })
+        })
       console.log('this is chosenGarden', chosenGarden)
+    } else {
+      this.setState({ gardenId: chosenGarden._id })
     }
     // if (!chosenGarden)
-    gardenCreate(garden, user)
-      .then(res => {
-        this.setState({ gardenId: res.data.garden._id })
-        return res
-      })
-      .then(res => msgAlert({
-        heading: 'Garden Joined Successfully!',
-        message: 'You are now a member',
-        variant: 'success'
-      }))
-      .catch(error => {
-        msgAlert({
-          heading: 'Sorry, that didnt work!',
-          message: 'Could not join this garden ' + error.message,
-          variant: 'danger'
-        })
-      })
-      // else redirect to view/show of chosenGarden
+    // else redirect to view/show of chosenGarden
   }
   render () {
     const { gardenId } = this.state
