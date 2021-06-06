@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
+// import { Link } from 'react-router-dom'
 
 const CommentForm = ({ comment, handleSubmit, handleChange }) => (
   <form onSubmit={handleSubmit}>
@@ -18,7 +20,7 @@ const CommentForm = ({ comment, handleSubmit, handleChange }) => (
       value={comment.body}
       onChange={handleChange}
     />
-    <button type='submit'>Submit</button>
+    <Button type='submit'>Write a Post</Button>
   </form>
 )
 

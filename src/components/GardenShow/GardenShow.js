@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
-import { Button } from 'react-bootstrap'
+// import { Button } from 'react-bootstrap'
 // import withRouter so we have access to the match route prop
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { gardenShow } from '../../api/gardens'
 import CommentCreate from '../CommentCreate/CommentCreate'
 
@@ -50,9 +50,6 @@ class GardenShow extends Component {
           <p>{garden.borough}</p>
           <p>{garden.zipCode}</p>
           <p>{garden.comments}</p>
-          <Link to="/comments">
-            <Button>Write a Post</Button>
-          </Link>
           <CommentCreate
             gardenId={garden._id}
             user={this.props.user}

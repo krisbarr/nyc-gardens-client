@@ -28,11 +28,12 @@ class GardenCreate extends Component {
     // console.log(garden.parksId)
     // console.log('these are createdGardens', createdGardens[0])
     // console.log(createdGardens)
-    // if (createdGardens.length > 0) {
-    //   const chosenGarden = createdGardens.gardens.find(garden => garden.parksId.some(parksId => parksId === garden.parksId))
-    //   // const chosenGarden = createdGardens.gardens.find(({ parksId }) => parksId === garden.parksId)
-    //   console.log('this is chosenGarden', chosenGarden)
-    // }
+    if (this.props.createdGardens.gardens.length > 0) {
+      // const chosenGarden = createdGardens.gardens.find(garden => garden.parksId.some(parksId => parksId === garden.parksId))
+      const chosenGarden = this.props.createdGardens.gardens.find(({ parksId }) => parksId === garden.parksId)
+      console.log('this is chosenGarden', chosenGarden)
+    }
+    // if (!chosenGarden)
     gardenCreate(garden, user)
       .then(res => {
         this.setState({ gardenId: res.data.garden._id })
@@ -50,6 +51,7 @@ class GardenCreate extends Component {
           variant: 'danger'
         })
       })
+      // else redirect to view/show of chosenGarden
   }
   render () {
     const { gardenId } = this.state

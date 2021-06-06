@@ -22,7 +22,7 @@ class GardenIndex extends Component {
   }
   render () {
     // destructure our gardens state
-    console.log('these are createdGardens', this.state.createdGardens)
+    console.log('these are createdGardens', this.props.createdGardens)
     const { gardens } = this.state
     // if we haven't fetched any gardens yet from the API
     if (!gardens) {

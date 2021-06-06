@@ -16,7 +16,9 @@ class CommentCreate extends Component {
         gardenId: this.props.gardenId
       },
       // createdId will be null, until we successfully create a comment
-      createdId: null
+      createdId: null,
+      gardenId: this.props.gardenId
+
     }
   }
 
@@ -31,13 +33,13 @@ class CommentCreate extends Component {
       // set the createdId to the id of the comment we just created
       // .then(res => this.setState({ createdId: res.data.comment._id }))
       .then(res => {
-        this.setState({ createdId: res.data.garden.comments._id })
+        this.setState({ createdId: res.data.garden.comments[0]._id })
         // pass the response to the next .then so we can show the title
         return res
       })
       .then(res => msgAlert({
         heading: 'Created Comment Successfully',
-        message: `Comment has been created successfully. Now viewing ${res.data.garden.comments.title}.`,
+        message: `Comment has been created successfully. Now viewing ${res.data.garden.comments[0].title}.`,
         variant: 'success'
       }))
       .catch(error => {
@@ -66,15 +68,20 @@ class CommentCreate extends Component {
       }
     })
   }
+  // setViewComment = (comment) => {
+  //   this.setState({ viewComment: comment })
+  //   console.log(comment)
+  // }
 
   render () {
     // destructure our comment and createdId state
-    const { comment, createdId } = this.state
+    const { comment, createdId, gardenId } = this.state
+    console.log(gardenId)
 
     // if the comment has been created and we set its id
     if (createdId) {
       // redirect to the comments show page
-      return <Redirect to={`/comments/${createdId}`} />
+      return <Redirect to={`/comments/${createdId}/${gardenId}`}/>
     }
 
     return (
