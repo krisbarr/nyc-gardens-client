@@ -49,16 +49,12 @@ class GardenCreate extends Component {
             variant: 'danger'
           })
         })
-      console.log('this is chosenGarden', chosenGarden)
     } else {
       this.setState({ gardenId: chosenGarden._id })
     }
-    // if (!chosenGarden)
-    // else redirect to view/show of chosenGarden
   }
   render () {
     const { gardenId } = this.state
-    console.log('This is the gardenId', gardenId)
     if (gardenId) {
       return <Redirect to={`/gardens/${gardenId}`}/>
     }

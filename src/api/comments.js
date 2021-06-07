@@ -27,6 +27,19 @@ export const commentShow = (commentId, gardenId, user) => {
     }
   })
 }
+export const commentUpdate = (commentId, gardenId, comment, user) => {
+  return axios({
+    url: apiUrl + '/comments/' + commentId + '/' + gardenId + '/edit',
+    method: 'PATCH',
+    // Add an authorization header
+    headers: {
+      // we need the user, so we have access to their token
+      'Authorization': `Bearer ${user.token}`
+    },
+    // send the comment object as our data for creating a movie
+    data: { title: comment.title, body: comment.body }
+  })
+}
 
 export const commentDelete = (commentId, gardenId, user) => {
   return axios({

@@ -40,7 +40,7 @@ class CreatedGardenIndex extends Component {
     }
     const gardenCards = gardens.map(garden => {
       return (
-        <Card bg="secondary" key={garden.parksid} style={{ width: '16rem', margin: 8 }}>
+        <Card bg="secondary" key={garden._id} style={{ width: '16rem', margin: 8 }}>
           {/* <Card.Img variant='top' src={garden.backgroundUrl}/> */}
           <Card.Body>
             <Card.Title>{garden.name}</Card.Title>

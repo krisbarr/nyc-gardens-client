@@ -20,7 +20,7 @@ const CommentForm = ({ comment, handleSubmit, handleChange }) => (
       value={comment.body}
       onChange={handleChange}
     />
-    <Button type='submit'>Write a Post</Button>
+    <Button type='submit'>Post</Button>
   </form>
 )
 

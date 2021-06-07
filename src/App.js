@@ -15,6 +15,7 @@ import GardenIndex from './components/GardenIndex/GardenIndex'
 import GardenView from './components/GardenView/GardenView'
 import GardenShow from './components/GardenShow/GardenShow'
 import CommentShow from './components/CommentShow/CommentShow'
+import CommentUpdate from './components/CommentUpdate/CommentUpdate'
 import { createdGardenIndex } from './api/gardens'
 
 class App extends Component {
@@ -24,8 +25,7 @@ class App extends Component {
       user: null,
       msgAlerts: [],
       viewGarden: null,
-      createdGardens: null,
-      viewComment: null
+      createdGardens: null
     }
   }
   componentDidMount () {
@@ -94,10 +94,13 @@ class App extends Component {
             <GardenView createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/gardens/:id' render={() => (
-            <GardenShow setViewComment={this.setViewComment} createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
+            <GardenShow createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/comments/:commentId/:gardenId' render={() => (
-            <CommentShow setViewComment={this.setViewComment} createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
+            <CommentShow createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/comments/:commentId/:gardenId/edit' render={() => (
+            <CommentUpdate createdGardens={this.state.createdGardens} viewGarden={this.state.viewGarden} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

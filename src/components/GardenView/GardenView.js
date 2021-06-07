@@ -35,7 +35,6 @@ class GardenView extends Component {
   }
   render () {
     const { viewGarden, user, createdGardens, msgAlert } = this.props
-    console.log(viewGarden)
     if (!viewGarden) {
       return (
         <Spinner animation="border" role="status">
